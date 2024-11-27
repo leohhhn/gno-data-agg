@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"regexp"
+	"time"
 )
 
 const (
@@ -16,7 +17,7 @@ const (
 )
 
 func main() {
-	res, err := fetchData(localIndexer, allTxsQuery)
+	res, err := fetchData(test5Indexer, allTxsQuery)
 	if err != nil {
 		panic(err)
 	}
@@ -25,6 +26,7 @@ func main() {
 	parseData(string(res), uniqueAddresses)
 
 	fmt.Printf("Total unique addresses: %d\n", len(uniqueAddresses))
+	fmt.Printf("Time of snapshot: %s\n", time.Now().Format(time.RFC3339))
 	for addr := range uniqueAddresses {
 		fmt.Println(addr)
 	}
